@@ -1,0 +1,7 @@
+interface:
+  display_name: "Acorn Brain"
+  short_description: "Refine rough ideas into approved Acorn tickets"
+  default_prompt: "Use $acorn-brain to refine this rough idea into Acorn ticket candidates."
+
+policy:
+  allow_implicit_invocation: false

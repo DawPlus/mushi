@@ -1,0 +1,60 @@
+{
+	"projectName": "mushi",
+	"coreSkills": [
+		"adhd-output",
+		"coding-standards"
+	],
+	"transport": {
+		"default": "economy"
+	},
+	"roles": {
+		"planner": {
+			"guide": "acorn/agents/planner.md"
+		},
+		"worker": {
+			"guide": "acorn/agents/worker.md"
+		},
+		"code-reviewer": {
+			"guide": "acorn/agents/code-reviewer.md"
+		},
+		"security-reviewer": {
+			"guide": "acorn/agents/security-reviewer.md"
+		},
+		"e2e-runner": {
+			"guide": "acorn/agents/e2e-runner.md"
+		},
+		"reporter": {
+			"guide": "acorn/agents/reporter.md"
+		}
+	},
+	"workflow": {
+		"contextBudget": {
+			"relatedFiles": 2
+		},
+		"maxAgentRetries": 1,
+		"phases": [
+			"plan",
+			"build",
+			"verify",
+			"report",
+			"done"
+		]
+	},
+	"validationCommands": [
+		"pnpm build:web",
+		"pnpm build:api",
+		"pnpm test:api",
+		"pnpm test:integration",
+		"pnpm db:validate",
+		"pnpm lint:web",
+		"pnpm test:web",
+		"pnpm check:acorn"
+	],
+	"docsConsistencyCommand": "node acorn/scripts/check-docs-consistency.cjs",
+	"ticketCompletionCommand": "node acorn/scripts/check-ticket-completion.cjs",
+	"projectDocsPath": "docs",
+	"codeMapPath": "docs/code_map.md",
+	"ticketBoardPath": "docs/tickets/board.md",
+	"ticketBodyPath": "docs/tickets/active/{ID}.md",
+	"ticketArchivePath": "docs/tickets/archive"
+}

@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ownerId references the authenticated Supabase Auth user UUID.
+// Application code must always scope device and job reads/writes to this owner.
+model Device {
+  id         String           @id @default(uuid()) @db.Uuid
+  ownerId    String           @db.Uuid
+  name       String
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  snapshots  DeviceSnapshot[]
+  jobs       DeviceJob[]
+
+  @@index([ownerId])
+}
+
+model DeviceSnapshot {
+  id         String   @id @default(uuid()) @db.Uuid
+  deviceId   String   @db.Uuid
+  recordedAt DateTime @default(now())
+  metrics    Json
+  device     Device   @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+
+  @@index([deviceId, recordedAt])
+}
+
+model DeviceJob {
+  id          String    @id @default(uuid()) @db.Uuid
+  deviceId    String    @db.Uuid
+  kind        String
+  status      String    @default("pending")
+  payload     Json
+  result      Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  completedAt DateTime?
+  device      Device    @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+
+  @@index([deviceId, status, createdAt])
+}

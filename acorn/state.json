@@ -1,0 +1,15 @@
+{
+	"version": 2,
+	"activeTicket": "T-261009-02",
+	"classification": "feature",
+	"phase": "build",
+	"next": "worker",
+	"verification": "pending",
+	"gates": {
+		"codeReview": "pending",
+		"securityReview": "pending",
+		"e2e": "n/a",
+		"docs": "pending"
+	},
+	"updatedAt": "2026-10-09T13:07:50+09:00"
+}

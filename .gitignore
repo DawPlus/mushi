@@ -1,0 +1,15 @@
+/docs/tickets/
+/handoff.md
+/node_modules/
+/apps/*/node_modules/
+/apps/*/dist/
+# Local secrets (root and all workspaces)
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+/apps/api/generated/
+/apps/*/.vite/
+*.tsbuildinfo

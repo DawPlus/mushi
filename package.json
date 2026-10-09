@@ -1,0 +1,27 @@
+{
+  "name": "mushi",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:web": "pnpm --filter @mushi/web dev",
+    "dev:api": "pnpm --filter @mushi/api dev",
+    "build:api": "pnpm --filter @mushi/api build",
+    "typecheck:api": "pnpm --filter @mushi/api typecheck",
+    "test:api": "pnpm --filter @mushi/api test",
+    "db:validate": "pnpm --filter @mushi/api db:validate",
+    "test:integration": "pnpm build:api && pnpm --filter @mushi/web test:integration",
+    "build:web": "pnpm --filter @mushi/web build",
+    "typecheck:web": "pnpm --filter @mushi/web typecheck",
+    "lint:web": "pnpm --filter @mushi/web lint",
+    "test:web": "pnpm --filter @mushi/web test",
+    "check:acorn": "node acorn/scripts/check-docs-consistency.cjs"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.18.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module"
+}
