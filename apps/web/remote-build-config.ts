@@ -1,4 +1,4 @@
-import { validateRemoteRegistry, type RemoteRegistration } from './src/features/system/remote-registration'
+import { validateRemoteRegistry, type RemoteRegistration } from './src/features/system/remote-registration.ts'
 
 /** Trusted deployment-controlled Vite build inputs. No browser or owner API data is used. */
 export function parseBuildRemotes(raw: string | undefined, origins: string | undefined): RemoteRegistration[] {

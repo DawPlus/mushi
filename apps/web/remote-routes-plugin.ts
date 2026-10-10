@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite'
-import type { RemoteRegistration } from './src/features/system/remote-registration'
+import type { RemoteRegistration } from './src/features/system/remote-registration.ts'
 
 /** Emit only trusted, build-time Federation imports; no runtime-provided URL or module specifier. */
 export function remoteRoutesPlugin(items: readonly RemoteRegistration[]): Plugin {
