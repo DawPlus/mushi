@@ -1,5 +1,7 @@
 /docs/tickets/
 /handoff.md
+# Private local deployment notes (may contain credentials)
+/docs/mushi-first-deployment-guide.md
 /node_modules/
 /apps/*/node_modules/
 /apps/*/dist/

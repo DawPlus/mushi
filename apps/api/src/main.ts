@@ -10,7 +10,7 @@ async function bootstrap() {
   app.enableCors({ origin: [resolveWebOrigin(process.env.WEB_ORIGIN, process.env.NODE_ENV === 'production')] })
   app.use((req: { method?: string; originalUrl?: string; url?: string }, res: { status: (code: number) => { json: (body: object) => void } }, next: () => void) => {
     const path = req.originalUrl ?? req.url ?? ''
-    if (isBlockedHostedRoute(req.method ?? '', path, process.env.VERCEL === '1')) {
+    if (isBlockedHostedRoute(req.method ?? '', path, process.env.VERCEL === '1', process.env.MUSHI_HOSTED_MONITOR_READS === 'true')) {
       res.status(503).json({ message: 'Endpoint unavailable in hosted login-only mode' })
       return
     }
