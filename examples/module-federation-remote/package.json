@@ -1,0 +1,23 @@
+{
+  "name": "federation-remote-example",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host localhost --port 3903",
+    "build": "vite build",
+    "preview": "vite preview --host localhost --port 3903"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@module-federation/vite": "^1.23.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.3"
+  }
+}

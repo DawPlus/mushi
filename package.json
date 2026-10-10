@@ -14,7 +14,9 @@
     "typecheck:web": "pnpm --filter @mushi/web typecheck",
     "lint:web": "pnpm --filter @mushi/web lint",
     "test:web": "pnpm --filter @mushi/web test",
-    "check:acorn": "node acorn/scripts/check-docs-consistency.cjs"
+    "check:acorn": "node acorn/scripts/check-docs-consistency.cjs",
+    "test:agent": "node --test agent/checkin.test.mjs",
+    "check:ops": "node scripts/ops-preflight.mjs"
   },
   "devEngines": {
     "packageManager": {

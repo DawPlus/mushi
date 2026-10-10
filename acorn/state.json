@@ -1,15 +1,15 @@
 {
 	"version": 2,
-	"activeTicket": "T-261009-02",
-	"classification": "feature",
-	"phase": "build",
-	"next": "worker",
+	"activeTicket": null,
+	"classification": null,
+	"phase": null,
+	"next": null,
 	"verification": "pending",
 	"gates": {
 		"codeReview": "pending",
-		"securityReview": "pending",
+		"securityReview": "n/a",
 		"e2e": "n/a",
 		"docs": "pending"
 	},
-	"updatedAt": "2026-10-09T13:07:50+09:00"
+	"updatedAt": "2026-10-10T18:43:50+09:00"
 }

@@ -6,13 +6,13 @@ Later set DIRECT_URL for Prisma migration tooling, and DATABASE_URL for a separa
 
 ## Current API protection (server-to-server only)
 
-NestJS applies a global Bearer guard to API routes. Only `GET /health` is explicitly public. `GET /auth/check` is a protected endpoint for testing access. Set `API_ACCESS_TOKEN` as a private server environment variable with a long randomly generated value; send `Authorization: Bearer <token>` over HTTPS. If it is missing or wrong, protected routes return HTTP 401. The API must not be publicly deployed with an easily guessed token. Never put this token in the React bundle, `VITE_` variables, Git, screenshots or chat logs. Rotating the token requires updating authorized server-side clients; this MVP uses one shared token and has no per-user permissions, revocation list or rate-limiting. Keep `/auth/check` server-to-server and do not expose a browser-based token form.
+NestJS applies a global Bearer guard to ordinary API routes. `GET /health` is public and `GET /auth/check` tests the shared server token. Set `API_ACCESS_TOKEN` as a private server environment variable with a long random value; never put it in the React bundle. Routes marked public may still enforce their own boundary: `/owner/*` verifies the Supabase owner bearer, while `POST /bridge/mcp` verifies the separate server-only `MUSHI_BRIDGE_TOKEN`. Missing or invalid credentials fail closed with HTTP 401. Do not put any server token, Bridge workspace path, database credential, or privileged key in `VITE_` variables, Git, screenshots, or chat logs.
 
-## Future personal login
+## Local personal login (browser E2E pending)
 
 Use Supabase Auth for identity when the external setup is ready. The NestJS API must verify signed access tokens, issuer, audience and expiry before granting access. Only invited accounts should be allowed initially. Never put database credentials or privileged API keys in browser code.
 
-The initial `Device`, `DeviceSnapshot`, and `DeviceJob` Prisma models have been defined but not migrated. They do not currently enforce ownership or row-level security. User login is not enabled; the existing shared API token guard is not a replacement for user authentication.
+The initial `Device`, `DeviceSnapshot`, and `DeviceJob` Prisma models have been defined but not migrated. They do not currently enforce ownership or row-level security. A local Supabase email-link login UI and independently verified owner route exist. The full signed-in browser journey remains unverified; the legacy shared API guard is not user authentication.
 
 ## Local configuration and deployment boundary
 

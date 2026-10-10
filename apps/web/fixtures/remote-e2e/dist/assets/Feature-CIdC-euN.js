@@ -1,0 +1,1 @@
+import{n as e}from"./_virtual_mf___mfe_internal__mushi_test__mf_owner__138262469394176__loadShare__shared-BFklUxdV.js";function t(){return e(`main`,{"data-testid":`mushi-remote-e2e`,style:{padding:24},children:`Mushi Remote E2E: connected`})}export{t};

@@ -8,7 +8,7 @@
     "build": "vite build && tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "node --test scripts/data-foundation.test.mjs scripts/ui-boundary.test.cjs",
+    "test": "node --import tsx --test scripts/data-foundation.test.mjs scripts/ui-boundary.test.cjs scripts/owner-login-feedback.test.mjs scripts/mac-status.test.mjs scripts/monitor-api.test.mjs scripts/app-shell.test.mjs scripts/home-greetings.test.mjs scripts/remote-gate.test.mjs scripts/theme-tokens.test.mjs scripts/component-theme.test.mjs scripts/motion-animation.test.mjs scripts/metric-bar.test.mjs scripts/sidebar.test.mjs scripts/monitor-feature.test.mjs scripts/bridge-feature.test.mjs scripts/owner-api.test.mjs scripts/remote-registration.test.mjs scripts/remote-compatibility.test.mjs scripts/monitor-history.test.mjs scripts/remote-release.test.mjs scripts/remote-build-config.test.mjs scripts/remote-route.test.mjs",
     "test:integration": "node --test scripts/local-integration.test.mjs",
     "preview": "vite preview"
   },
@@ -22,7 +22,10 @@
     "cn": "^0.4.0",
     "jotai": "^3.0.1",
     "ky": "^2.1.0",
+    "lucide-animated": "1.0.5",
     "lucide-react": "^1.52.0",
+    "motion": "^12.43.0",
+    "next-themes": "^0.4.6",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "shadcn": "^4.21.4",
@@ -30,6 +33,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@module-federation/vite": "^1.23.3",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/router-plugin": "^1.168.42",
     "@types/node": "^26.6.4",
@@ -38,6 +42,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "eslint": "^10.12.0",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.1",
     "vite": "^8.3.3"

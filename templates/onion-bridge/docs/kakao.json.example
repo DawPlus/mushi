@@ -1,0 +1,9 @@
+{
+  "restApiKey": "PASTE_REST_API_KEY",
+  "clientSecret": "",
+  "redirectUri": "http://127.0.0.1:3848/kakao/callback",
+  "accessToken": "",
+  "refreshToken": "",
+  "expiresAt": 0,
+  "skillSecret": ""
+}

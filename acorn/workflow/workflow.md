@@ -17,6 +17,15 @@ Plan(ticket) -> Build(TDD) -> Verify(declared gates) -> Reporter -> Done
 
 Escalate for dependencies, schema/migration, config, public contracts, security boundaries, broad file impact, or unclear acceptance.
 
+## Completion First / Goal Lock
+
+- Before creating a ticket, check relevant active work. Finish the current `Goal` and original `Done` criteria before exploring newly discovered features; do not recursively spawn tickets.
+- Classify discovered work: **required** for current acceptance -> handle in the same ticket; **optional** -> leave a brief deferred note without interrupting; **independent blocker** -> record `Need / Owner / Why` and justify a separate ticket only if unavoidable. Keep unrelated work separate without inflating the current scope.
+- Keep original acceptance fixed during execution. Cross-role handoff or a failed test does not automatically require a child ticket. Return to the original goal after a necessary dependency; attempt verification and closeout before switching focus.
+- Distinguish technical blockers from Human approval and live-environment gates. Do not invent work while awaiting approval.
+- Reuse existing test/QA evidence only if relevant code, configuration, environment, and acceptance are unchanged; local tests never prove hosted behavior.
+- Keep modifications proportional to the original `Done` criteria. Broader refactors or shared-contract changes require concrete justification, not speculative improvement.
+
 ## Plan
 
 Planner writes the smallest executable ticket using `Goal / Do / Keep / Done / Role / Gates`; optional `Read` and `Depends`. `Gates` is ordered and ends with `docs`. Production-code tickets include `code-review`; add `security` and `e2e` only when their trigger applies. Planner publishes the BOARD row as `ready`, `Next=<worker role>` and then stops.

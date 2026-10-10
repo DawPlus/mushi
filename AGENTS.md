@@ -44,7 +44,7 @@ Prefer `workflow.contextBudget.relatedFiles` (default 2) before widening reads; 
 
 ## Core Rules
 
-- Natural language is the primary interface. Do not require Acorn CLI knowledge.
+- Natural language is the primary interface. Do not require Acorn CLI knowledge. The executor prefers `ticket.cjs` for ticket state changes; manual edits must pass the consistency check.
 - The request router classifies only. Planner owns managed-work scope/gates; each role owns only its transition; Reporter owns completion.
 - Role boundaries are hard. Route out-of-scope work through the ticket's declared flow; real scope/gate changes return to Planner.
 - BOARD is active-work truth. State and handoff are caches. Revalidate before transitions.

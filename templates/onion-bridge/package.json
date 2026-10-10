@@ -1,0 +1,49 @@
+{
+  "name": "onion-bridge",
+  "version": "0.2.0",
+  "description": "Headless MCP bridge for exposing the current directory to ChatGPT.",
+  "type": "module",
+  "bin": {
+    "onion": "./bin/onionBridge.js"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "npm run build && node ./bin/onionBridge.js web",
+    "bridge": "npm run build && node ./bin/onionBridge.js",
+    "web": "npm run build && node ./bin/onionBridge.js web",
+    "serve": "npm run build && node ./bin/onionBridge.js serve",
+    "remote": "npm run build && node ./bin/onionBridge.js remote",
+    "status": "npm run build && node ./bin/onionBridge.js status",
+    "up": "npm run build && node ./bin/onionBridge.js up",
+    "stop": "npm run build && node ./bin/onionBridge.js stop",
+    "rotate": "npm run build && node ./bin/onionBridge.js rotate",
+    "kakao:login": "npm run build && node ./bin/onionBridge.js kakao login",
+    "kakao:test": "npm run build && node ./bin/onionBridge.js kakao test",
+    "test": "npm run build && node --test test/**/*.test.js",
+    "pack:local": "npm run build && npm pack"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@nestjs/common": "^12.1.2",
+    "@nestjs/core": "^12.1.2",
+    "@nestjs/platform-express": "^12.1.2",
+    "express": "^5.2.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^4.4.3"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

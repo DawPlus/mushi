@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Daily Onion control-secret rotation + Kakao notify (default 10:00).
+
+  Install:
+    1) Copy and edit paths if needed:
+         cp docs/launchd/com.onion-bridge.rotate.plist ~/Library/LaunchAgents/
+    2) Set REPO / PNPM below (or edit ProgramArguments after copy).
+    3) launchctl load ~/Library/LaunchAgents/com.onion-bridge.rotate.plist
+
+  Unload:
+    launchctl unload ~/Library/LaunchAgents/com.onion-bridge.rotate.plist
+
+  Logs:
+    /tmp/onion-rotate.log
+    /tmp/onion-rotate.err
+
+  Notes:
+    - Mac must be awake/logged in at 10:00 (or change Hour/Minute).
+    - Requires: built repo, Tailscale, ~/.onion-bridge/kakao.json after `onion kakao login`.
+    - Find pnpm: `which pnpm`
+-->
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.onion-bridge.rotate</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/zsh</string>
+      <string>-lc</string>
+      <!-- Edit REPO path and pnpm if needed -->
+      <string>cd /Users/doh/workspace/Onion-Bridge &amp;&amp; /Users/doh/.nvm/versions/node/v24.13.0/bin/pnpm rotate -- --notify=kakao</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Hour</key>
+      <integer>10</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/tmp/onion-rotate.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/onion-rotate.err</string>
+    <key>RunAtLoad</key>
+    <false/>
+  </dict>
+</plist>

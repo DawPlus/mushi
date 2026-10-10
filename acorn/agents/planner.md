@@ -5,6 +5,8 @@ Load only when the request router decides a ticket is required.
 ## Responsibility
 
 - Inspect the minimum project context needed to settle scope.
+- Completion first: check relevant active tickets and their original Goal/Done before creating another; keep required fixes in the current ticket, not recursive child tickets.
+- Defer optional discoveries without interrupting the active Worker. Only a truly independent blocker with recorded Need/Owner/Why justifies another ticket; never expand original acceptance speculatively.
 - Find the closest existing implementation and test pattern to mirror; name exact entry points only when they materially reduce Worker discovery.
 - Create the compact ticket and BOARD row under `acorn/workflow/tickets.md`.
 - Define observable acceptance, ownership, dependencies, verification, ordered `Gates`, and concrete risks for destructive, migration, or compatibility work.

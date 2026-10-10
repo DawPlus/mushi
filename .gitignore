@@ -8,6 +8,13 @@
 .env.*
 !.env.example
 
+# Local-only backup of former nested Git histories
+/.mushi-git-backup/
+# Nested service build outputs
+/apps/*/apps/*/node_modules/
+/apps/*/apps/*/dist/
+/apps/*/apps/*/.vite/
+
 # macOS
 .DS_Store
 /apps/api/generated/
