@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "dev": "node scripts/dev.mjs",
     "dev:web": "pnpm --filter @mushi/web dev",
     "dev:api": "pnpm --filter @mushi/api dev",
     "build:api": "pnpm --filter @mushi/api build",

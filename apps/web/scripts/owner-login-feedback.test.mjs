@@ -3,8 +3,10 @@ import assert from 'node:assert/strict'
 import { loginLinkMessage, loginRedirectOrigin, oauthCallbackError } from '../src/features/system/owner-login-feedback.ts'
 
 test('deployment URLs redirect magic links to the stable production domain', () => {
-  assert.equal(loginRedirectOrigin('https://mushi-123.vercel.app', 'mushi-123.vercel.app'), 'https://mushi-wine.vercel.app')
-  assert.equal(loginRedirectOrigin('http://localhost:5173', 'localhost'), 'http://localhost:5173')
+  assert.equal(loginRedirectOrigin('https://mushi-123.vercel.app', 'mushi-123.vercel.app'), 'https://mushi-wine.vercel.app/')
+  assert.equal(loginRedirectOrigin('http://localhost:5173', 'localhost'), 'http://localhost:5173/')
+  assert.equal(loginRedirectOrigin('http://127.0.0.1:5173', '127.0.0.1'), 'http://127.0.0.1:5173/')
+  assert.equal(loginRedirectOrigin('http://localhost:5174', 'localhost'), 'http://localhost:5174/')
 })
 
 test('oauth errors do not reflect provider text', () => {

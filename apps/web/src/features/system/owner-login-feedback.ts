@@ -1,5 +1,8 @@
+/** Keep localhost OAuth callbacks on the exact development origin and port. */
 export function loginRedirectOrigin(origin: string, hostname: string): string {
-  return hostname.endsWith('.vercel.app') ? 'https://mushi-wine.vercel.app' : origin
+  const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]'
+  const base = isLocal ? origin : hostname.endsWith('.vercel.app') ? 'https://mushi-wine.vercel.app' : origin
+  return `${base}/`
 }
 
 export function oauthCallbackError(search: string): string | null {

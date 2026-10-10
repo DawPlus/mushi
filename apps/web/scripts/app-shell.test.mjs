@@ -40,11 +40,31 @@ test('owner login does not render a second logout header bar', () => {
 
 test('login page uses command-center card shell', () => {
   const login = readFileSync(new URL('../src/features/system/owner-login.tsx', import.meta.url), 'utf8')
+  const typing = readFileSync(new URL('../src/components/common/typing-animation.tsx', import.meta.url), 'utf8')
   assert.match(login, /AppAnimatedGrid/)
   assert.match(login, /AppMagicCard/)
+  assert.match(login, /AppTypingAnimation/)
   assert.match(login, /소유자 이메일/)
   assert.match(login, /로그인 링크 받기/)
-  assert.match(login, /Command Center/)
+  assert.match(login, /\/asset\/login-mushi\.jpg/)
+  assert.match(login, /무시\(Mushi\)/)
+  assert.match(login, /당일 회식은 사양합니다/)
+  assert.match(login, /예\? 그걸 제가요\?/)
+  assert.match(login, /loop/)
+  assert.match(login, /max-w-lg/)
+  assert.match(login, /rotate-45|말풍|aria-live/)
+  assert.match(login, /sm:h-80|h-80/)
+  assert.doesNotMatch(login, /brand-midnight|radial-gradient\(ellipse_at_center/)
+  assert.match(typing, /TypingAnimation/)
+  assert.match(typing, /useReducedMotion/)
+  assert.match(login, /font-mushi/)
+})
+
+test('login display font uses Jua via theme token', () => {
+  const styles = readFileSync(new URL('../src/styles.css', import.meta.url), 'utf8')
+  assert.match(styles, /@fontsource\/jua/)
+  assert.match(styles, /--font-mushi/)
+  assert.match(styles, /Jua/)
 })
 
 test('shell backdrop uses Magic UI Flickering Grid via common wrapper', () => {
