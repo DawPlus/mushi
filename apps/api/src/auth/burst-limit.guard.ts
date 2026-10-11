@@ -21,7 +21,9 @@ export class BurstLimitGuard implements CanActivate {
     const projectsPath = /^\/owner\/projects(?:\/[a-z0-9-]{2,40}\/remove)?$/.test(pathname)
     const bridgePath = /^\/owner\/bridge(?:\/(?:start|stop|start-directory|pick-workspace|folders|projects|project-flag|dev-action|tunnel-action|configuration))?$/.test(pathname)
     const agentPath = /^\/owner\/mac-agent\/(?:status|start|stop)$/.test(pathname)
-    const sensitive = pathname === '/auth/owner' || jobsPath || projectsPath || bridgePath || agentPath || /^\/(?:owner\/)?devices\/[^/]+\/heartbeat$/.test(pathname)
+    const bookmarksPath = /^\/owner\/bookmarks(?:\/[0-9a-f-]{36})?$/.test(pathname)
+    const notesPath = /^\/owner\/(?:notes(?:\/[0-9a-f-]{36})?|note-categories(?:\/[0-9a-f-]{36})?)$/.test(pathname)
+    const sensitive = pathname === '/auth/owner' || bookmarksPath || notesPath || jobsPath || projectsPath || bridgePath || agentPath || /^\/(?:owner\/)?devices\/[^/]+\/heartbeat$/.test(pathname)
     if (!sensitive) return true
     const now = Date.now()
     if (counters.size >= MAX_TRACKED) {
@@ -30,7 +32,7 @@ export class BurstLimitGuard implements CanActivate {
     }
     // Do not trust user-provided X-Forwarded-For without an explicit trusted-proxy configuration.
     const identity = req.socket?.remoteAddress ?? req.ip ?? 'unknown'
-    const kind = pathname.startsWith('/auth/') ? 'auth' : jobsPath ? 'cli-jobs' : projectsPath ? 'projects' : bridgePath ? 'bridge' : 'heartbeat'
+    const kind = pathname.startsWith('/auth/') ? 'auth' : jobsPath ? 'cli-jobs' : projectsPath ? 'projects' : bridgePath ? 'bridge' : bookmarksPath ? 'bookmarks' : 'heartbeat'
     const key = identity + ':' + req.method + ':' + kind
     const limit = kind === 'auth' ? 30 : 120
     const previous = counters.get(key)

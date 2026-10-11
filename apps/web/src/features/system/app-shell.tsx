@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
-import { ChevronLeft } from 'lucide-react'
-import { Link, useRouterState } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import {
   ActivityIcon,
   AppAnimatedGrid,
@@ -9,13 +8,10 @@ import {
   PageEnter,
   ThemeToggle,
 } from '../../components/common'
-import { menuRegistry } from './menu-registry'
 import { useOwnerAuth } from './owner-auth'
+import { menuRegistry } from './menu-registry'
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const pathname = useRouterState({ select: state => state.location.pathname })
-  const current = menuRegistry.find(item => item.href === pathname && item.href !== '/')
-  const onHome = pathname === '/'
   const ownerAuth = useOwnerAuth()
 
   return (
@@ -30,18 +26,13 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-5 md:px-6 lg:px-8">
           <div className="flex min-w-0 items-center gap-3">
             <Link
-              to="/"
+              to="/dashboard"
               className="flex items-center gap-2 font-semibold text-foreground transition-opacity hover:opacity-80"
-              aria-label="홈으로"
+              aria-label="대시보드로"
             >
               <ActivityIcon size={22} className="shrink-0 text-primary" />
               <span>Mushi</span>
             </Link>
-            {!onHome && current && (
-              <span className="hidden truncate text-sm text-muted-foreground sm:inline">
-                / {current.label}
-              </span>
-            )}
           </div>
           <div className="flex items-center gap-1">
             <ThemeToggle />
@@ -59,14 +50,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             )}
           </div>
         </div>
-        <nav aria-label="주요 메뉴" className="relative z-10 border-t border-border/45 bg-background/35">
-          <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-5 md:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {!onHome && <Link to="/" className="mr-1 inline-flex shrink-0 items-center gap-1 rounded-lg px-2.5 py-2 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"><ChevronLeft size={14} /> 홈</Link>}
-            {menuRegistry.filter(item => item.ready).map(item => {
-              const Icon = item.icon
-              const active = item.href === pathname
-              return <Link key={item.id} to={item.href} aria-current={active ? 'page' : undefined} className={`inline-flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground'}`}><Icon size={15} aria-hidden="true" />{item.label}</Link>
-            })}
+        <nav aria-label="주요 메뉴" className="relative z-10 border-t border-border/50 bg-background/35">
+          <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-2 sm:px-5 md:px-6 lg:px-8">
+            {menuRegistry.map(item => <Link key={item.id} to={item.href} activeProps={{ className: 'bg-primary/10 text-primary' }} className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"><item.icon size={16} />{item.label}</Link>)}
           </div>
         </nav>
       </header>

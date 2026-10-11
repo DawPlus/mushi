@@ -1,4 +1,5 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { BentoHome } from '../features/system/bento-home'
+import { createFileRoute, Navigate } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/')({ component: BentoHome })
+export const Route = createFileRoute('/')({
+  component: () => <Navigate to="/dashboard" replace />,
+})

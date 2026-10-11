@@ -3,9 +3,9 @@ import { ownerHttpErrorMessage } from './owner-http-errors'
 
 export { ownerHttpErrorMessage } from './owner-http-errors'
 
-const base = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
+const base = import.meta.env?.VITE_API_BASE_URL || 'http://localhost:3000'
 
-export async function ownerRequest<T>(path: string, options: { method?: 'GET' | 'POST'; body?: unknown } = {}): Promise<T> {
+export async function ownerRequest<T>(path: string, options: { method?: 'GET' | 'POST' | 'PATCH' | 'DELETE'; body?: unknown; timeoutMs?: number } = {}): Promise<T> {
   const token = await getOwnerAccessToken()
   if (!token) throw new Error('로그인 세션이 만료됐습니다.')
   const endpoint = new URL(base)
@@ -17,8 +17,9 @@ export async function ownerRequest<T>(path: string, options: { method?: 'GET' | 
     method: options.method ?? 'GET',
     headers: { Authorization: 'Bearer ' + token, ...(options.body === undefined ? {} : { 'Content-Type': 'application/json' }) },
     ...(options.body === undefined ? {} : { body: JSON.stringify(options.body) }),
-    cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(8000),
+    cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(Math.min(60000, Math.max(1000, options.timeoutMs ?? 8000))),
   })
   if (!response.ok) throw new Error(ownerHttpErrorMessage(response.status))
+  if (response.status === 204) return undefined as T
   return response.json() as Promise<T>
 }

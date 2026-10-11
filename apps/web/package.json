@@ -21,6 +21,7 @@
     "@tanstack/react-router": "^1.170.41",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
+    "embla-carousel-react": "^8.6.0",
     "jotai": "^3.0.1",
     "ky": "^2.1.0",
     "lucide-animated": "1.0.5",

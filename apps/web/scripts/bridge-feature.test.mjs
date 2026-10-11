@@ -14,14 +14,9 @@ const confirmPath = join(root, 'src/components/common/confirm-dialog.tsx')
 const commonIndexPath = join(root, 'src/components/common/index.ts')
 const alertDialogPath = join(root, 'src/components/ui/alert-dialog.tsx')
 
-test('menu enables Bridge as a ready /bridge destination without Onion wording', () => {
-  const bridge = menuRegistry.find(item => item.id === 'bridge')
-  assert.ok(bridge)
-  assert.equal(bridge.label, 'Bridge')
-  assert.equal(bridge.href, '/bridge')
-  assert.equal(bridge.ready, true)
-  const menuSource = readFileSync(menuPath, 'utf8')
-  assert.doesNotMatch(menuSource, /Onion/)
+test('cloud menu keeps the legacy Bridge feature hidden', () => {
+  assert.equal(menuRegistry.some(item => item.id === 'bridge'), false)
+  assert.match(readFileSync(menuPath, 'utf8'), /notes/)
 })
 
 test('bridge route and feature modules exist with shell patterns', () => {
@@ -97,11 +92,8 @@ test('bridge settings use common AnimatedList wrapper for profiles', () => {
   assert.doesNotMatch(feature, /from ['"].*react-bits-animated-list['"]/)
 })
 
-test('home bridge tile drops Onion wording when Bridge is enabled', () => {
+test('cloud home only launches Notes and excludes Bridge', () => {
   const home = readFileSync(homePath, 'utf8')
-  assert.doesNotMatch(home, /Onion/)
-  const bridgeModule = home.match(/bridge:\s*\{[^}]+\}/)
-  assert.ok(bridgeModule, 'bridge module metadata present')
-  assert.match(bridgeModule[0], /Bridge|워크스페이스|연결/)
-  assert.match(bridgeModule[0], /kind:\s*'live'|kind:\s*"live"/)
+  assert.match(home, /\/notes/)
+  assert.doesNotMatch(home, /bridge|Onion/)
 })

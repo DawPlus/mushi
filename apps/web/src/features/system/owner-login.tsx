@@ -19,8 +19,8 @@ import {
 	oauthCallbackError,
 } from "./owner-login-feedback";
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const url = import.meta.env?.VITE_SUPABASE_URL;
+const key = import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY;
 const auth = url && key ? createClient(url, key) : null;
 
 export async function getOwnerAccessToken() {

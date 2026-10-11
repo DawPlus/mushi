@@ -12,11 +12,19 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AutomationRouteImport } from './routes/automation'
+import { Route as BookmarksRouteImport } from './routes/bookmarks'
 import { Route as BridgeRouteImport } from './routes/bridge'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as MonitorRouteImport } from './routes/monitor'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as TerminalRouteImport } from './routes/terminal'
 import { Route as ExtRemoteIdRouteImport } from './routes/ext/$remoteId'
+import { Route as NotesIndexRouteImport } from './routes/notes/index'
+import { Route as NotesNewRouteImport } from './routes/notes/new'
+import { Route as NotesNoteIdIndexRouteImport } from './routes/notes/$noteId/index'
+import { Route as NotesNoteIdEditRouteImport } from './routes/notes/$noteId/edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,14 +41,34 @@ const AutomationRoute = AutomationRouteImport.update({
   path: '/automation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookmarksRoute = BookmarksRouteImport.update({
+  id: '/bookmarks',
+  path: '/bookmarks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BridgeRoute = BridgeRouteImport.update({
   id: '/bridge',
   path: '/bridge',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MonitorRoute = MonitorRouteImport.update({
   id: '/monitor',
   path: '/monitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpportunitiesRoute = OpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -58,37 +86,81 @@ const ExtRemoteIdRoute = ExtRemoteIdRouteImport.update({
   path: '/ext/$remoteId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesIndexRoute = NotesIndexRouteImport.update({
+  id: '/notes/',
+  path: '/notes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesNewRoute = NotesNewRouteImport.update({
+  id: '/notes/new',
+  path: '/notes/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesNoteIdIndexRoute = NotesNoteIdIndexRouteImport.update({
+  id: '/notes/$noteId/',
+  path: '/notes/$noteId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesNoteIdEditRoute = NotesNoteIdEditRouteImport.update({
+  id: '/notes/$noteId/edit',
+  path: '/notes/$noteId/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRoute
   '/automation': typeof AutomationRoute
+  '/bookmarks': typeof BookmarksRoute
   '/bridge': typeof BridgeRoute
+  '/dashboard': typeof DashboardRoute
   '/monitor': typeof MonitorRoute
+  '/news': typeof NewsRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/projects': typeof ProjectsRoute
   '/terminal': typeof TerminalRoute
   '/ext/$remoteId': typeof ExtRemoteIdRoute
+  '/notes/new': typeof NotesNewRoute
+  '/notes/': typeof NotesIndexRoute
+  '/notes/$noteId/edit': typeof NotesNoteIdEditRoute
+  '/notes/$noteId/': typeof NotesNoteIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRoute
   '/automation': typeof AutomationRoute
+  '/bookmarks': typeof BookmarksRoute
   '/bridge': typeof BridgeRoute
+  '/dashboard': typeof DashboardRoute
   '/monitor': typeof MonitorRoute
+  '/news': typeof NewsRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/projects': typeof ProjectsRoute
   '/terminal': typeof TerminalRoute
   '/ext/$remoteId': typeof ExtRemoteIdRoute
+  '/notes/new': typeof NotesNewRoute
+  '/notes': typeof NotesIndexRoute
+  '/notes/$noteId/edit': typeof NotesNoteIdEditRoute
+  '/notes/$noteId': typeof NotesNoteIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agents': typeof AgentsRoute
   '/automation': typeof AutomationRoute
+  '/bookmarks': typeof BookmarksRoute
   '/bridge': typeof BridgeRoute
+  '/dashboard': typeof DashboardRoute
   '/monitor': typeof MonitorRoute
+  '/news': typeof NewsRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/projects': typeof ProjectsRoute
   '/terminal': typeof TerminalRoute
   '/ext/$remoteId': typeof ExtRemoteIdRoute
+  '/notes/new': typeof NotesNewRoute
+  '/notes/': typeof NotesIndexRoute
+  '/notes/$noteId/edit': typeof NotesNoteIdEditRoute
+  '/notes/$noteId/': typeof NotesNoteIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -96,42 +168,74 @@ export interface FileRouteTypes {
     | '/'
     | '/agents'
     | '/automation'
+    | '/bookmarks'
     | '/bridge'
+    | '/dashboard'
     | '/monitor'
+    | '/news'
+    | '/opportunities'
     | '/projects'
     | '/terminal'
     | '/ext/$remoteId'
+    | '/notes/new'
+    | '/notes/'
+    | '/notes/$noteId/edit'
+    | '/notes/$noteId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/agents'
     | '/automation'
+    | '/bookmarks'
     | '/bridge'
+    | '/dashboard'
     | '/monitor'
+    | '/news'
+    | '/opportunities'
     | '/projects'
     | '/terminal'
     | '/ext/$remoteId'
+    | '/notes/new'
+    | '/notes'
+    | '/notes/$noteId/edit'
+    | '/notes/$noteId'
   id:
     | '__root__'
     | '/'
     | '/agents'
     | '/automation'
+    | '/bookmarks'
     | '/bridge'
+    | '/dashboard'
     | '/monitor'
+    | '/news'
+    | '/opportunities'
     | '/projects'
     | '/terminal'
     | '/ext/$remoteId'
+    | '/notes/new'
+    | '/notes/'
+    | '/notes/$noteId/edit'
+    | '/notes/$noteId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentsRoute: typeof AgentsRoute
   AutomationRoute: typeof AutomationRoute
+  BookmarksRoute: typeof BookmarksRoute
   BridgeRoute: typeof BridgeRoute
+  DashboardRoute: typeof DashboardRoute
   MonitorRoute: typeof MonitorRoute
+  NewsRoute: typeof NewsRoute
+  OpportunitiesRoute: typeof OpportunitiesRoute
   ProjectsRoute: typeof ProjectsRoute
   TerminalRoute: typeof TerminalRoute
   ExtRemoteIdRoute: typeof ExtRemoteIdRoute
+  NotesNewRoute: typeof NotesNewRoute
+  NotesIndexRoute: typeof NotesIndexRoute
+  NotesNoteIdEditRoute: typeof NotesNoteIdEditRoute
+  NotesNoteIdIndexRoute: typeof NotesNoteIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -157,6 +261,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AutomationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bookmarks': {
+      id: '/bookmarks'
+      path: '/bookmarks'
+      fullPath: '/bookmarks'
+      preLoaderRoute: typeof BookmarksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bridge': {
       id: '/bridge'
       path: '/bridge'
@@ -164,11 +275,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BridgeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/monitor': {
       id: '/monitor'
       path: '/monitor'
       fullPath: '/monitor'
       preLoaderRoute: typeof MonitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/opportunities': {
+      id: '/opportunities'
+      path: '/opportunities'
+      fullPath: '/opportunities'
+      preLoaderRoute: typeof OpportunitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -192,6 +324,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExtRemoteIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes/': {
+      id: '/notes/'
+      path: '/notes'
+      fullPath: '/notes/'
+      preLoaderRoute: typeof NotesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes/new': {
+      id: '/notes/new'
+      path: '/notes/new'
+      fullPath: '/notes/new'
+      preLoaderRoute: typeof NotesNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes/$noteId/': {
+      id: '/notes/$noteId/'
+      path: '/notes/$noteId'
+      fullPath: '/notes/$noteId/'
+      preLoaderRoute: typeof NotesNoteIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes/$noteId/edit': {
+      id: '/notes/$noteId/edit'
+      path: '/notes/$noteId/edit'
+      fullPath: '/notes/$noteId/edit'
+      preLoaderRoute: typeof NotesNoteIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -199,11 +359,19 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentsRoute: AgentsRoute,
   AutomationRoute: AutomationRoute,
+  BookmarksRoute: BookmarksRoute,
   BridgeRoute: BridgeRoute,
+  DashboardRoute: DashboardRoute,
   MonitorRoute: MonitorRoute,
+  NewsRoute: NewsRoute,
+  OpportunitiesRoute: OpportunitiesRoute,
   ProjectsRoute: ProjectsRoute,
   TerminalRoute: TerminalRoute,
   ExtRemoteIdRoute: ExtRemoteIdRoute,
+  NotesNewRoute: NotesNewRoute,
+  NotesIndexRoute: NotesIndexRoute,
+  NotesNoteIdEditRoute: NotesNoteIdEditRoute,
+  NotesNoteIdIndexRoute: NotesNoteIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

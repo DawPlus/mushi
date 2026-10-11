@@ -5,14 +5,36 @@ import { menuRegistry } from '../src/features/system/menu-registry.ts'
 
 const shell = readFileSync(new URL('../src/features/system/app-shell.tsx', import.meta.url), 'utf8')
 const root = readFileSync(new URL('../src/routes/__root.tsx', import.meta.url), 'utf8')
-const home = readFileSync(new URL('../src/features/system/bento-home.tsx', import.meta.url), 'utf8')
 const index = readFileSync(new URL('../src/routes/index.tsx', import.meta.url), 'utf8')
 
-test('menu registry keeps ready labels for bento tiles', () => {
-  for (const label of ['대시보드', 'Mac Monitor', 'Bridge', '원격 CLI', 'Projects', 'OpenHarness', '자동화 (n8n)']) {
-    assert.ok(menuRegistry.some(item => item.label === label && item.ready), label)
-  }
-  assert.ok(!menuRegistry.some(item => /Onion/i.test(item.label)))
+test('cloud navigation exposes Notes, not Mac-local tools', () => {
+  assert.ok(menuRegistry.some(item => item.id === 'dashboard' && item.href === '/dashboard' && item.ready))
+  assert.ok(menuRegistry.some(item => item.id === 'notes' && item.href === '/notes' && item.ready))
+  assert.ok(!menuRegistry.some(item => ['monitor','bridge','terminal','projects','agents','automation'].includes(item.id)))
+})
+
+test('dashboard route and feature shell exist', () => {
+  const route = readFileSync(new URL('../src/routes/dashboard.tsx', import.meta.url), 'utf8')
+  const feature = readFileSync(new URL('../src/features/dashboard/Feature.tsx', import.meta.url), 'utf8')
+  const iconCloud = readFileSync(new URL('../src/components/common/icon-cloud.tsx', import.meta.url), 'utf8')
+  assert.match(route, /createFileRoute\('\/dashboard'\)/)
+  assert.match(route, /features\/dashboard\/Feature/)
+  assert.match(feature, /aria-label=["']대시보드["']/)
+  assert.match(feature, /greeting\.title/)
+  assert.match(feature, /AppIconCloud/)
+  assert.match(feature, /AppNumberTicker/)
+  assert.match(feature, /AppBorderBeam/)
+  assert.match(feature, /AppTypingAnimation|AppShinyText/)
+  assert.match(feature, /AppAuroraText/)
+  assert.match(feature, /AppHyperText/)
+  assert.match(feature, /AppWordRotate/)
+  assert.match(feature, /\/asset\/koong\//)
+  assert.match(feature, /createHomeGreeting/)
+  assert.match(feature, /from ['"].*components\/common['"]/)
+  assert.doesNotMatch(feature, /from ['"].*components\/ui/)
+  assert.doesNotMatch(feature, /cdn\.simpleicons\.org/)
+  assert.match(iconCloud, /IconCloud/)
+  assert.match(iconCloud, /useReducedMotion/)
 })
 
 test('owner auth and shell persist above routed content', () => {
@@ -26,7 +48,7 @@ test('shell uses top header hub without sidebar', () => {
   assert.ok(shell.includes('PageEnter'))
   assert.ok(shell.includes('AppAnimatedGrid'))
   assert.ok(shell.includes('fullscreen'))
-  assert.ok(shell.includes("to=\"/\""))
+  assert.ok(shell.includes("to=\"/dashboard\""))
   assert.ok(!shell.includes('motion.aside'))
   assert.ok(!shell.includes('app-sidebar'))
   assert.ok(shell.includes("from '../../components/common'"))
@@ -75,18 +97,30 @@ test('shell backdrop uses Magic UI Flickering Grid via common wrapper', () => {
   assert.match(grid, /fullscreen/)
 })
 
-test('home route renders bento launcher from menu registry', () => {
-  assert.match(index, /BentoHome/)
-  assert.match(home, /menuRegistry/)
-  assert.match(home, /Mac Monitor|monitor/)
-  assert.match(home, /예정/)
-  assert.match(home, /StatusSummary/)
-  assert.match(home, /Command Center/)
-  assert.match(home, /\/asset\/images\.jpg/)
-  assert.match(home, /createHomeGreeting|greeting\.title/)
-  assert.match(home, /alt=["']무시["']/)
-  assert.doesNotMatch(home, /좋은 밤이야, Mushi/)
-  assert.doesNotMatch(home, /LiveMacStatus|AppMagicCard|AppBorderBeam/)
+test('root path redirects into the dashboard after login', () => {
+  assert.match(index, /Navigate/)
+  assert.match(index, /to=["']\/dashboard["']/)
+  assert.doesNotMatch(index, /BentoHome/)
+})
+
+test('notes list uses polished board cards and filters', () => {
+  const notes = readFileSync(new URL('../src/features/notes/notes-pages.tsx', import.meta.url), 'utf8')
+  assert.match(notes, /aria-label=["']게시판 \/ 메모["']/)
+  assert.match(notes, /AppMagicCard/)
+  assert.match(notes, /AppBlurFade/)
+  assert.match(notes, /kindTone/)
+  assert.match(notes, /from ['"].*components\/common['"]/)
+  assert.doesNotMatch(notes, /from ['"].*components\/ui/)
+})
+
+test('note editor matches polished board shell', () => {
+  const notes = readFileSync(new URL('../src/features/notes/notes-pages.tsx', import.meta.url), 'utf8')
+  assert.match(notes, /aria-label=\{id \? '글 수정' : '새 글 작성'\}/)
+  assert.match(notes, /Markdown 작성/)
+  assert.match(notes, /미리보기/)
+  assert.match(notes, /AppInput/)
+  assert.match(notes, /sticky bottom-4/)
+  assert.match(notes, /useEffect/)
 })
 
 test('status summary is a compact strip not a monitor clone', () => {
