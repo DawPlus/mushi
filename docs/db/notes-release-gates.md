@@ -10,7 +10,7 @@
 ## Security boundary
 - Every Notes repository operation takes a verified owner UUID and scopes reads/writes to `owner_id`. A composite foreign key prevents category/tag references across owners.
 - Direct PostgreSQL connections do not inherit Supabase `auth.uid()`. The runtime role relies on owner-scoped server SQL and controlled credentials. Database RLS is NOT enabled, so do not expose DB connections or `NOTES_DATABASE_URL` to browsers or untrusted processes.
-- Hosted Notes endpoints are additionally controlled by `MUSHI_HOSTED_NOTES=true`; existing owner JWT and restricted machine bearer apply. Default hosted Notes exposure remains off.
+- Hosted Notes endpoints rely on existing owner JWT and restricted machine bearer checks; the former hosted route allowlist and MUSHI_HOSTED_NOTES toggle have been retired.
 - For a future stronger boundary, add a securely scoped per-transaction owner context with database RLS policies. Do not add blanket permissive policies.
 
 ## QA evidence (2026-10-11)
@@ -19,7 +19,7 @@
 - `RUN_NOTES_BROWSER_QA=1 node --import tsx test/notes-browser-qa.mjs` (from `apps/api`, with `pnpm dev:web` running on localhost:5173, port 3000 free and local Chrome installed): passed real browser create/edit/delete through React, NestJS and Supabase; it uses a temporary QA-only machine token plus development guest mode, not a real Google OAuth session. QA rows and temporary Chrome profile cleaned up.\n- `pnpm test:api`, `pnpm typecheck:api`, `pnpm test:web`, `pnpm build:web` and Acorn consistency checks passed in the implementation cycle.
 
 ## Hosted release checklist
-1. Configure the Notes-only pooled `NOTES_DATABASE_URL`, Supabase owner authentication configuration and `MUSHI_HOSTED_NOTES=true` as server-only secrets in the target hosted environment.
+1. Configure the Notes-only pooled `NOTES_DATABASE_URL` and Supabase owner authentication configuration as server-only secrets in the target hosted environment.
 2. Confirm actual signed-in owner browser flow, CORS and deployed HTTP requests; never copy the Notes DB URL or service token into `VITE_*`.
 3. Verify monitoring and Bridge stay blocked in hosted mode, make a rollback/revocation plan, and check logs and 4xx/5xx handling before public release.
 4. If prod credentials are not configured, Notes intentionally return 503; this is not a successful release.

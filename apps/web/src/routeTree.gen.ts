@@ -10,16 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AutomationRouteImport } from './routes/automation'
 import { Route as BookmarksRouteImport } from './routes/bookmarks'
-import { Route as BridgeRouteImport } from './routes/bridge'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as MonitorRouteImport } from './routes/monitor'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as TerminalRouteImport } from './routes/terminal'
 import { Route as ExtRemoteIdRouteImport } from './routes/ext/$remoteId'
 import { Route as NotesIndexRouteImport } from './routes/notes/index'
 import { Route as NotesNewRouteImport } from './routes/notes/new'
@@ -31,11 +28,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AgentsRoute = AgentsRouteImport.update({
-  id: '/agents',
-  path: '/agents',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AutomationRoute = AutomationRouteImport.update({
   id: '/automation',
   path: '/automation',
@@ -44,11 +36,6 @@ const AutomationRoute = AutomationRouteImport.update({
 const BookmarksRoute = BookmarksRouteImport.update({
   id: '/bookmarks',
   path: '/bookmarks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BridgeRoute = BridgeRouteImport.update({
-  id: '/bridge',
-  path: '/bridge',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -74,11 +61,6 @@ const OpportunitiesRoute = OpportunitiesRouteImport.update({
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TerminalRoute = TerminalRouteImport.update({
-  id: '/terminal',
-  path: '/terminal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExtRemoteIdRoute = ExtRemoteIdRouteImport.update({
@@ -109,16 +91,13 @@ const NotesNoteIdEditRoute = NotesNoteIdEditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/agents': typeof AgentsRoute
   '/automation': typeof AutomationRoute
   '/bookmarks': typeof BookmarksRoute
-  '/bridge': typeof BridgeRoute
   '/dashboard': typeof DashboardRoute
   '/monitor': typeof MonitorRoute
   '/news': typeof NewsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/projects': typeof ProjectsRoute
-  '/terminal': typeof TerminalRoute
   '/ext/$remoteId': typeof ExtRemoteIdRoute
   '/notes/new': typeof NotesNewRoute
   '/notes/': typeof NotesIndexRoute
@@ -127,16 +106,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/agents': typeof AgentsRoute
   '/automation': typeof AutomationRoute
   '/bookmarks': typeof BookmarksRoute
-  '/bridge': typeof BridgeRoute
   '/dashboard': typeof DashboardRoute
   '/monitor': typeof MonitorRoute
   '/news': typeof NewsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/projects': typeof ProjectsRoute
-  '/terminal': typeof TerminalRoute
   '/ext/$remoteId': typeof ExtRemoteIdRoute
   '/notes/new': typeof NotesNewRoute
   '/notes': typeof NotesIndexRoute
@@ -146,16 +122,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/agents': typeof AgentsRoute
   '/automation': typeof AutomationRoute
   '/bookmarks': typeof BookmarksRoute
-  '/bridge': typeof BridgeRoute
   '/dashboard': typeof DashboardRoute
   '/monitor': typeof MonitorRoute
   '/news': typeof NewsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/projects': typeof ProjectsRoute
-  '/terminal': typeof TerminalRoute
   '/ext/$remoteId': typeof ExtRemoteIdRoute
   '/notes/new': typeof NotesNewRoute
   '/notes/': typeof NotesIndexRoute
@@ -166,16 +139,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/agents'
     | '/automation'
     | '/bookmarks'
-    | '/bridge'
     | '/dashboard'
     | '/monitor'
     | '/news'
     | '/opportunities'
     | '/projects'
-    | '/terminal'
     | '/ext/$remoteId'
     | '/notes/new'
     | '/notes/'
@@ -184,16 +154,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/agents'
     | '/automation'
     | '/bookmarks'
-    | '/bridge'
     | '/dashboard'
     | '/monitor'
     | '/news'
     | '/opportunities'
     | '/projects'
-    | '/terminal'
     | '/ext/$remoteId'
     | '/notes/new'
     | '/notes'
@@ -202,16 +169,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/agents'
     | '/automation'
     | '/bookmarks'
-    | '/bridge'
     | '/dashboard'
     | '/monitor'
     | '/news'
     | '/opportunities'
     | '/projects'
-    | '/terminal'
     | '/ext/$remoteId'
     | '/notes/new'
     | '/notes/'
@@ -221,16 +185,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AgentsRoute: typeof AgentsRoute
   AutomationRoute: typeof AutomationRoute
   BookmarksRoute: typeof BookmarksRoute
-  BridgeRoute: typeof BridgeRoute
   DashboardRoute: typeof DashboardRoute
   MonitorRoute: typeof MonitorRoute
   NewsRoute: typeof NewsRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
   ProjectsRoute: typeof ProjectsRoute
-  TerminalRoute: typeof TerminalRoute
   ExtRemoteIdRoute: typeof ExtRemoteIdRoute
   NotesNewRoute: typeof NotesNewRoute
   NotesIndexRoute: typeof NotesIndexRoute
@@ -247,13 +208,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/agents': {
-      id: '/agents'
-      path: '/agents'
-      fullPath: '/agents'
-      preLoaderRoute: typeof AgentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/automation': {
       id: '/automation'
       path: '/automation'
@@ -266,13 +220,6 @@ declare module '@tanstack/react-router' {
       path: '/bookmarks'
       fullPath: '/bookmarks'
       preLoaderRoute: typeof BookmarksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bridge': {
-      id: '/bridge'
-      path: '/bridge'
-      fullPath: '/bridge'
-      preLoaderRoute: typeof BridgeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -308,13 +255,6 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terminal': {
-      id: '/terminal'
-      path: '/terminal'
-      fullPath: '/terminal'
-      preLoaderRoute: typeof TerminalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ext/$remoteId': {
@@ -357,16 +297,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AgentsRoute: AgentsRoute,
   AutomationRoute: AutomationRoute,
   BookmarksRoute: BookmarksRoute,
-  BridgeRoute: BridgeRoute,
   DashboardRoute: DashboardRoute,
   MonitorRoute: MonitorRoute,
   NewsRoute: NewsRoute,
   OpportunitiesRoute: OpportunitiesRoute,
   ProjectsRoute: ProjectsRoute,
-  TerminalRoute: TerminalRoute,
   ExtRemoteIdRoute: ExtRemoteIdRoute,
   NotesNewRoute: NotesNewRoute,
   NotesIndexRoute: NotesIndexRoute,

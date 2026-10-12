@@ -1,7 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { parseGithubTrending } from '../src/news/github-trending.js'
-import { isBlockedHostedRoute } from '../src/auth/hosted-route-policy.js'
 
 const example = (name: string, stars: string) => `
 <article class="Box-row">
@@ -23,9 +22,4 @@ test('extracts GitHub trending display order, description, language and daily st
 test('ignores invalid repo links and empty responses', () => {
   assert.deepEqual(parseGithubTrending('nothing'), [])
   assert.deepEqual(parseGithubTrending(example('bad/name/extra', '123')), [])
-})
-test('hosted allowlist only admits public GitHub Trending GET', () => {
-  assert.equal(isBlockedHostedRoute('GET','/public/github-trending',true), false)
-  assert.equal(isBlockedHostedRoute('POST','/public/github-trending',true), true)
-  assert.equal(isBlockedHostedRoute('GET','/public/github-trending/anything',true), true)
 })
