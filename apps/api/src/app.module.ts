@@ -1,3 +1,4 @@
+import { AiAnalysesController } from './personal-mcp/ai-analyses.controller.js'
 import { PersonalMcpController } from './personal-mcp/personal-mcp.controller.js'
 import { Module } from '@nestjs/common'
 import { APP_GUARD } from '@nestjs/core'
@@ -18,7 +19,7 @@ import { OpportunitiesController } from './opportunities/opportunities.controlle
 @Module({
   imports: [NotesModule, BookmarksModule],
   controllers: [
-    PersonalMcpController, GithubTrendingController, HealthController, AuthController, OwnerController,
+    AiAnalysesController, PersonalMcpController, GithubTrendingController, HealthController, AuthController, OwnerController,
     HeartbeatController, OwnerHeartbeatController, OwnerProjectsController,
     OwnerPublicDataController, OpportunitiesController,
   ],
